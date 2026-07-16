@@ -20,17 +20,18 @@ jobs:
       - name: Clone OWASP Juice Shop source code
         run: git clone https://github.com/juice-shop/juice-shop.git juice-shop-src
         
-      - name: Run Semgrep SAST
-        uses: returntocorp/semgrep-action@v1
+      - name: Install and Run Semgrep SAST
+        run: |
+          pip install semgrep
+          semgrep scan --config=p/default --json -o semgrep-report.json juice-shop-src || true
+        
+
+        
+      - name: Upload Semgrep Report
+        uses: actions/upload-artifact@v4
         with:
-          config: "p/default"
-          # Quét vào thư mục chứa code Juice Shop
-          # Generate kết quả dạng json để sau này thu thập (Bước 4)
-          generateJobSummary: false
-        env:
-          SEMGREP_RULES: p/default
-        # Note: Thực tế Semgrep action tự động quét thư mục hiện tại.
-        # Ở đây ta clone code vào để nó tự động phát hiện và quét.
+          name: semgrep-scan-report
+          path: semgrep-report.json
 
   dast-zap:
     runs-on: ubuntu-latest
