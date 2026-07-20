@@ -1,0 +1,324 @@
+{
+  "detect_rate": 1.0,
+  "detected": 10,
+  "total": 10,
+  "avg_seconds": 0.007394146919250488,
+  "false_positive_est": 0.1,
+  "rows": [
+    {
+      "challenge": "Login Admin",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Login Admin",
+        "signals_mentioned": [
+          "admin",
+          "login",
+          "password"
+        ],
+        "notes": "admin login password",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "538d0d90",
+          "message": "OK",
+          "echo_hash": "538d0d90"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3
+      }
+    },
+    {
+      "challenge": "Union SQL Injection",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Union SQL Injection",
+        "signals_mentioned": [
+          "sql",
+          "union",
+          "search"
+        ],
+        "notes": "sql union search",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "ee095ab0",
+          "message": "OK",
+          "echo_hash": "ee095ab0"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3
+      }
+    },
+    {
+      "challenge": "DOM XSS",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge DOM XSS",
+        "signals_mentioned": [
+          "xss",
+          "script",
+          "search"
+        ],
+        "notes": "xss script search",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "3acc427e",
+          "message": "OK",
+          "echo_hash": "3acc427e"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3
+      }
+    },
+    {
+      "challenge": "Score Board",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Score Board",
+        "signals_mentioned": [
+          "score",
+          "challenge"
+        ],
+        "notes": "score challenge",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "781df326",
+          "message": "OK",
+          "echo_hash": "781df326"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8,
+        "final_score": 0.85,
+        "signal_hits": 2
+      }
+    },
+    {
+      "challenge": "Admin Registration",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Admin Registration",
+        "signals_mentioned": [
+          "register",
+          "role",
+          "admin"
+        ],
+        "notes": "register role admin",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "b79596c0",
+          "message": "OK",
+          "echo_hash": "b79596c0"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3
+      }
+    },
+    {
+      "challenge": "View Another User's Basket",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge View Another User's Basket",
+        "signals_mentioned": [
+          "basket",
+          "idor"
+        ],
+        "notes": "basket idor",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "75f60bfa",
+          "message": "OK",
+          "echo_hash": "75f60bfa"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8,
+        "final_score": 0.85,
+        "signal_hits": 2
+      }
+    },
+    {
+      "challenge": "Forged Feedback",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Forged Feedback",
+        "signals_mentioned": [
+          "feedback",
+          "xss"
+        ],
+        "notes": "feedback xss",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "ba38aa12",
+          "message": "OK",
+          "echo_hash": "ba38aa12"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8,
+        "final_score": 0.85,
+        "signal_hits": 2
+      }
+    },
+    {
+      "challenge": "JWT Issues",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge JWT Issues",
+        "signals_mentioned": [
+          "jwt",
+          "token",
+          "role"
+        ],
+        "notes": "jwt token role",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "84714ab2",
+          "message": "OK",
+          "echo_hash": "84714ab2"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3
+      }
+    },
+    {
+      "challenge": "Directory Listing FTP",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Directory Listing FTP",
+        "signals_mentioned": [
+          "ftp",
+          "directory"
+        ],
+        "notes": "ftp directory",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "12c62bea",
+          "message": "OK",
+          "echo_hash": "12c62bea"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8,
+        "final_score": 0.85,
+        "signal_hits": 2
+      }
+    },
+    {
+      "challenge": "Exposed Metrics",
+      "ok": true,
+      "hyp": {
+        "detected": true,
+        "evidence": "Mapped to Juice Shop challenge Exposed Metrics",
+        "signals_mentioned": [
+          "metrics",
+          "prometheus"
+        ],
+        "notes": "metrics prometheus",
+        "score": 0.85,
+        "llm_extra": {
+          "mock": true,
+          "id": "0125a9d9",
+          "message": "OK",
+          "echo_hash": "0125a9d9"
+        }
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8,
+        "final_score": 0.85,
+        "signal_hits": 2
+      }
+    }
+  ]
+}

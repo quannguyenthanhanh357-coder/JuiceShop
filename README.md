@@ -9,54 +9,73 @@ Hạ tầng DevSecOps + AI-assisted pentest thực hành trên **OWASP Juice Sho
 | Juice Shop | **v20.1.1** |
 | Commit | `f915bddd82790d0f3018902d36ae9b4241a5f51f` |
 | Pin file | `juice-shop/.sentinel-pin` |
-| Staging URL | http://localhost:3000 |
+| App (ZAP/debug) | http://localhost:3000 |
+| Kong (agents) | http://localhost:8000 |
 
 ## Cấu trúc thư mục
 
 ```
 Project-Sentinel/
-├── juice-shop/              # Source OWASP Juice Shop (đã clone, pin v20.1.1)
-├── docker-compose.yml       # Deploy giả lập staging
-├── .github/workflows/       # CI: SAST (Semgrep) + DAST (ZAP)
-├── scripts/                 # parse_results.py → SQLite data-lake
-├── data-lake/               # Báo cáo / DB lỗ hổng
-│   └── reports/
-├── agents/                  # (Tuần 4+) AI agents
-├── rag/                     # (Tuần 3+) RAG pipeline
-├── docs/notes/              # Attack Surface notes, nhật ký
+├── juice-shop/              # Source OWASP Juice Shop (pin v20.1.1)
+├── kong/kong.yml            # Key-auth + ACL (recon GET / exploit POST)
+├── docker-compose.yml       # juice-shop + Kong (db-less)
+├── .github/workflows/       # CI: Semgrep + ZAP
+├── scripts/                 # parse, seed reports, test Kong IAM
+├── data-lake/               # reports, SQLite, traces, agent outputs
+├── agents/                  # Recon / Fuzz / Exploit / Supervisor / guardrails
+├── rag/                     # ingest, hybrid search, eval retrieval
+├── docs/                    # PRD, Business Case, Runbook, FinOps, Benchmark
 └── README.md
 ```
 
-## Chạy staging (Docker Compose)
+## Chạy staging
 
 ```bash
 docker compose up -d --build
-# Mở http://localhost:3000
+# http://localhost:3000  — Juice Shop
+# http://localhost:8000  — Kong gateway
 docker compose ps
-docker compose logs -f juice-shop
 docker compose down
 ```
 
-> Lần build đầu từ source có thể mất nhiều phút. Trong CI, DAST dùng image `bkimminich/juice-shop:v20.1.1` (cùng version) để nhanh hơn.
+## Python setup & demo offline (MOCK LLM)
 
-## Gom kết quả scan vào data-lake
+Không cần `OPENAI_API_KEY` — agents trả JSON deterministic.
 
 ```bash
-python scripts/parse_results.py --semgrep semgrep-report.json --zap zap-report.json --db data-lake/vuln_data.db
+pip install -r requirements.txt
+python scripts/seed_sample_reports.py
+python rag/ingest.py && python rag/evaluate_retrieval.py
+python agents/run_syndicate.py          # auto HITL
+python agents/eval_pipeline.py
+python scripts/test_kong_iam.py         # cần compose up
 ```
 
-## Tiến độ (theo kế hoạch 12 tuần)
+API keys Kong demo: `recon-key-demo` (GET), `exploit-key-demo` (POST).
 
-Xem checklist chi tiết trong repo gốc `Ke_Hoach_Chi_Tiet_Thuc_Tap_Project_Sentinel.md`.
+## Tiến độ (12 tuần)
 
 | Tuần | Nội dung | Trạng thái |
 |---|---|---|
-| 0 | Clone Juice Shop + Compose + cấu trúc folder | ✅ Xong (Compose đã chạy localhost:3000) |
-| 1 | SAST/DAST CI + parse script + data-lake | **Skeleton có sẵn** — cần verify end-to-end |
-| 2–12 | Kong, RAG, Agents, Guardrails… | Chưa bắt đầu |
+| 0 | Clone Juice Shop + Compose | ✅ Done |
+| 1 | SAST/DAST CI + parse + Attack Surface + seed reports | ✅ Skeleton + demo |
+| 2 | Kong IAM + `test_kong_iam.py` + MCP stub | ✅ Skeleton + demo |
+| 3 | RAG ingest / hybrid / retrieval eval | ✅ Skeleton + demo (BOW fallback) |
+| 4 | Recon Agent → Attack Surface Map | ✅ Skeleton + demo (mock LLM) |
+| 5 | Fuzz Agent qua Kong rate-limit | ✅ Skeleton + demo |
+| 6 | Multi-agent Supervisor + traces | ✅ Skeleton + demo |
+| 7 | Indirect prompt injection + guardrails | ✅ Skeleton + demo |
+| 8 | HITL CLI approve/reject | ✅ Skeleton + demo |
+| 9 | PII redaction | ✅ Skeleton + demo |
+| 10 | Eval pipeline 10 challenges | ✅ Skeleton + demo |
+| 11 | Full Compose + FinOps + Runbook | ✅ Skeleton + demo |
+| 12 | PRD + Business Case | ✅ Skeleton + demo |
 
-## Mục tiêu giai đoạn 1
+Chi tiết nhật ký: `docs/notes/TIEN_DO.md`. Runbook: `docs/RUNBOOK.md`.
 
-- Triển khai Juice Shop trên localhost qua Compose
-- CI quét SAST (Semgrep trên `juice-shop/`) + DAST (ZAP)
-- Gom kết quả vào data-lake (SQLite) để phân tích Attack Surface
+**Tài liệu kiến thức Security (HTML):** mở file
+`C:\Users\ADMIN\Desktop\VInSOC\Project_Sentinel_Kien_Thuc_Security.html` trên trình duyệt.
+
+## An toàn
+
+Mọi fuzz/exploit **chỉ** nhắm `localhost` / dịch vụ Compose. Không tấn công host ngoài.

@@ -1,0 +1,34 @@
+{
+  "mock": true,
+  "id": "a66fba32",
+  "endpoints": [
+    {
+      "path": "/rest/products/search",
+      "method": "GET",
+      "risk": "high",
+      "issue": "SQL Injection",
+      "cve_related": [
+        "CWE-89"
+      ]
+    },
+    {
+      "path": "/api/Users",
+      "method": "POST",
+      "risk": "high",
+      "issue": "Broken Access Control / mass assignment",
+      "cve_related": [
+        "CWE-284"
+      ]
+    },
+    {
+      "path": "/api/Feedbacks",
+      "method": "POST",
+      "risk": "medium",
+      "issue": "Stored XSS",
+      "cve_related": [
+        "CWE-79"
+      ]
+    }
+  ],
+  "summary": "Juice Shop local: SQLi search, XSS feedback, weak admin registration."
+}

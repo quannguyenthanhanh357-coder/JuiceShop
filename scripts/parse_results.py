@@ -2,7 +2,15 @@ import json
 import sqlite3
 import argparse
 import os
+import sys
 from datetime import datetime
+
+# Windows console (cp1252) không in được tiếng Việt — ép UTF-8 khi có thể
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 # Khởi tạo hoặc kết nối DB
 def init_db(db_path):

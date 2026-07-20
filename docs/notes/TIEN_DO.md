@@ -4,37 +4,61 @@ Cập nhật: 2026-07-20
 
 ## Kết luận ngắn
 
-**Tuần 0 đã xong.** Đang ở **đầu/giữa Tuần 1**: CI + parse script đã có skeleton; còn verify pipeline trên GitHub và viết Attack Surface note.
+**Tuần 0–12 đã có skeleton + demo local.** LLM mặc định **MOCK** (không cần `OPENAI_API_KEY`) — phản hồi JSON deterministic để chạy offline. Traffic agent chỉ qua Kong `localhost:8000`.
 
 ## Chi tiết theo tuần
 
 ### Tuần 0 — Chuẩn bị nền tảng
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| Docker / Git / GitHub repo | ✅ | Repo `JuiceShop_VinSoc` trên GitHub |
-| Clone OWASP Juice Shop vào `juice-shop/` | ✅ | Pin **v20.1.1** (`f915bdd…`) |
-| `docker-compose.yml` giả lập staging | ✅ | Build từ `./juice-shop`, port 3000 |
-| Cấu trúc folder (agents, rag, data-lake, docs…) | ✅ | Đã tạo kèm `.gitkeep` |
-| README mô tả mục tiêu | ✅ | Đã cập nhật |
-| Verify `compose up` chạy được trên máy | ✅ | http://localhost:3000 → v20.1.1 |
-| Hello Agent / API key LLM | ⬜ | Chưa thấy trong repo |
-| Đọc OWASP Top 10 | ⬜ | Ngoài repo — tự check |
+| Clone Juice Shop v20.1.1 + Compose | ✅ | localhost:3000 |
+| Cấu trúc folder | ✅ | |
 
 ### Tuần 1 — SAST/DAST + CI/CD
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| GitHub Actions SAST (Semgrep) | ✅ skeleton | Đã chỉnh quét `juice-shop/` trong repo |
-| GitHub Actions DAST (ZAP) | ✅ skeleton | Dùng image pin v20.1.1 trong CI |
-| `scripts/parse_results.py` → SQLite | ✅ | Có sẵn |
-| `data-lake/` | ✅ folder | Chưa chắc đã có DB/report thật từ lần chạy |
-| Attack Surface note thủ công | ⬜ | Chưa có trong `docs/notes/` |
-| Verify pipeline xanh trên GitHub | ⬜ | Cần push + kiểm tra Actions |
+| CI Semgrep/ZAP | ✅ skeleton | `.github/workflows/security-scan.yml` |
+| `parse_results.py` + seed reports | ✅ | `scripts/seed_sample_reports.py` |
+| `ATTACK_SURFACE.md` | ✅ | `docs/notes/` |
 
-### Tuần 2+
-Chưa bắt đầu (Kong, RAG, Agents, …).
+### Tuần 2 — Kong & IAM
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| Kong db-less trong Compose | ✅ | port 8000 |
+| recon / exploit API keys + ACL | ✅ | `kong/kong.yml` |
+| `test_kong_iam.py` | ✅ | |
+| MCP stub `get_scan_results` | ✅ | `agents/mcp_server_stub.py` |
 
-## Việc nên làm tiếp (theo thứ tự)
+### Tuần 3 — RAG
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| ingest / query / hybrid / eval | ✅ | Chroma optional → BOW+BM25 fallback |
+| 10-question retrieval eval | ✅ | `rag/evaluate_retrieval.py` |
 
-1. Push thay đổi lên GitHub → xem workflow SAST/DAST chạy trên `juice-shop/`.
-2. Tải artifact report → chạy `python scripts/parse_results.py ...` → ghi Attack Surface vào `docs/notes/`.
-3. Sang Tuần 2: thêm Kong vào Compose.
+### Tuần 4–6 — Agents
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| Recon / Fuzz / Exploit / Supervisor | ✅ | mock LLM |
+| Traces `data-lake/traces/` | ✅ | |
+| `run_syndicate.py` E2E | ✅ | |
+
+### Tuần 7–9 — Bảo vệ AI
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| FTP indirect injection file | ✅ | `juice-shop/ftp/sentinel_indirect_injection.txt` |
+| Guardrails | ✅ | regex + classifier |
+| HITL CLI | ✅ | |
+| PII redaction | ✅ | email/phone/SSN |
+
+### Tuần 10–12 — LLMOps & bàn giao
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| Eval 10 challenges | ✅ | mock judge |
+| FinOps + Runbook | ✅ | `docs/` |
+| PRD + Business Case + Benchmark | ✅ | |
+
+## Mock mode
+
+- Không set `OPENAI_API_KEY` → `LLMClient.mock = True`.
+- Set key → dùng OpenAI (`openai` package).
+- Demo đầy đủ: xem `docs/RUNBOOK.md`.

@@ -1,0 +1,92 @@
+# Kong declarative config (DB-less) — Project Sentinel Tuần 2
+# recon-agent (key: recon-key-demo)  → ACL get-only → chỉ GET/HEAD/OPTIONS
+# exploit-agent (key: exploit-key-demo) → ACL exploit → POST được + rate-limit
+
+_format_version: "3.0"
+_transform: true
+
+services:
+  # Route đọc — cả recon và exploit đều gọi được
+  - name: juice-shop-read
+    url: http://juice-shop:3000
+    routes:
+      - name: read-api
+        paths:
+          - /api
+        methods:
+          - GET
+          - HEAD
+          - OPTIONS
+        strip_path: false
+      - name: read-rest
+        paths:
+          - /rest
+        methods:
+          - GET
+          - HEAD
+          - OPTIONS
+        strip_path: false
+    plugins:
+      - name: key-auth
+        config:
+          key_names:
+            - apikey
+          hide_credentials: true
+      - name: acl
+        config:
+          allow:
+            - get-only
+            - exploit
+          hide_groups_header: true
+
+  # Route ghi — chỉ exploit-agent; có rate-limit
+  - name: juice-shop-write
+    url: http://juice-shop:3000
+    routes:
+      - name: write-api
+        paths:
+          - /api
+        methods:
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+        strip_path: false
+      - name: write-rest
+        paths:
+          - /rest
+        methods:
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+        strip_path: false
+    plugins:
+      - name: key-auth
+        config:
+          key_names:
+            - apikey
+          hide_credentials: true
+      - name: acl
+        config:
+          allow:
+            - exploit
+          hide_groups_header: true
+      - name: rate-limiting
+        config:
+          minute: 20
+          policy: local
+          fault_tolerant: true
+
+consumers:
+  - name: recon-agent
+    keyauth_credentials:
+      - key: recon-key-demo
+    acls:
+      - group: get-only
+
+  - name: exploit-agent
+    keyauth_credentials:
+      - key: exploit-key-demo
+    acls:
+      - group: exploit

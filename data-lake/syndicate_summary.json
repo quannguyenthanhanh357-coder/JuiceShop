@@ -1,0 +1,84 @@
+{
+  "messages": [
+    {
+      "from": "supervisor",
+      "to": "recon",
+      "task": "map_attack_surface",
+      "data": {
+        "source": "data-lake"
+      }
+    },
+    {
+      "from": "recon",
+      "to": "supervisor",
+      "task": "attack_surface_done",
+      "data": {
+        "mock": true,
+        "id": "a66fba32",
+        "endpoints": [
+          {
+            "path": "/rest/products/search",
+            "method": "GET",
+            "risk": "high",
+            "issue": "SQL Injection",
+            "cve_related": [
+              "CWE-89"
+            ]
+          },
+          {
+            "path": "/api/Users",
+            "method": "POST",
+            "risk": "high",
+            "issue": "Broken Access Control / mass assignment",
+            "cve_related": [
+              "CWE-284"
+            ]
+          },
+          {
+            "path": "/api/Feedbacks",
+            "method": "POST",
+            "risk": "medium",
+            "issue": "Stored XSS",
+            "cve_related": [
+              "CWE-79"
+            ]
+          }
+        ],
+        "summary": "Juice Shop local: SQLi search, XSS feedback, weak admin registration."
+      }
+    },
+    {
+      "from": "supervisor",
+      "to": "fuzz",
+      "task": "fuzz_from_surface",
+      "data": {
+        "map": "attack_surface_map.json"
+      }
+    },
+    {
+      "from": "fuzz",
+      "to": "supervisor",
+      "task": "fuzz_done",
+      "data": {
+        "count": 3
+      }
+    },
+    {
+      "from": "supervisor",
+      "to": "exploit",
+      "task": "prove_finding",
+      "data": {
+        "need_hitl": true
+      }
+    },
+    {
+      "from": "exploit",
+      "to": "supervisor",
+      "task": "exploit_done",
+      "data": "executed"
+    }
+  ],
+  "surface_endpoints": 3,
+  "fuzz_count": 3,
+  "exploit_status": "executed"
+}
