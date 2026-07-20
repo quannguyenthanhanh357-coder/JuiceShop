@@ -38,3 +38,43 @@
 {"ts": "2026-07-20T03:28:47.647007+00:00", "agent": "eval", "event": "jwt", "data": {"ok": true, "score": 1.0}}
 {"ts": "2026-07-20T03:28:47.653501+00:00", "agent": "eval", "event": "dirListing", "data": {"ok": true, "score": 0.85}}
 {"ts": "2026-07-20T03:28:47.656915+00:00", "agent": "eval", "event": "exposedMetrics", "data": {"ok": true, "score": 0.85}}
+{"ts": "2026-07-20T03:45:06.577862+00:00", "agent": "eval", "event": "loginAdmin", "data": {"ok": true, "score": 0.8999999999999999, "improved": false}}
+{"ts": "2026-07-20T03:45:06.585128+00:00", "agent": "eval", "event": "unionSql", "data": {"ok": true, "score": 1.0, "improved": false}}
+{"ts": "2026-07-20T03:45:06.592628+00:00", "agent": "eval", "event": "domXss", "data": {"ok": true, "score": 0.75, "improved": false}}
+{"ts": "2026-07-20T03:45:06.597770+00:00", "agent": "eval", "event": "scoreBoard", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.599911+00:00", "agent": "eval", "event": "adminReg", "data": {"ok": true, "score": 0.8999999999999999, "improved": false}}
+{"ts": "2026-07-20T03:45:06.607542+00:00", "agent": "eval", "event": "basketIdor", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.611578+00:00", "agent": "eval", "event": "forgedFeedback", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.615610+00:00", "agent": "eval", "event": "jwt", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.621603+00:00", "agent": "eval", "event": "dirListing", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.629506+00:00", "agent": "eval", "event": "exposedMetrics", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:06.639618+00:00", "agent": "eval", "event": "loginAdmin", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:06.645129+00:00", "agent": "eval", "event": "unionSql", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:06.647747+00:00", "agent": "eval", "event": "domXss", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:06.653229+00:00", "agent": "eval", "event": "scoreBoard", "data": {"ok": true, "score": 0.75, "improved": true}}
+{"ts": "2026-07-20T03:45:06.658291+00:00", "agent": "eval", "event": "adminReg", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:06.661782+00:00", "agent": "eval", "event": "basketIdor", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:06.665196+00:00", "agent": "eval", "event": "forgedFeedback", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:06.671449+00:00", "agent": "eval", "event": "jwt", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:06.673625+00:00", "agent": "eval", "event": "dirListing", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:06.680482+00:00", "agent": "eval", "event": "exposedMetrics", "data": {"ok": true, "score": 0.75, "improved": true}}
+{"ts": "2026-07-20T03:45:41.587381+00:00", "agent": "eval", "event": "loginAdmin", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:41.588977+00:00", "agent": "eval", "event": "unionSql", "data": {"ok": true, "score": 0.8999999999999999, "improved": false}}
+{"ts": "2026-07-20T03:45:41.588977+00:00", "agent": "eval", "event": "domXss", "data": {"ok": true, "score": 0.75, "improved": false}}
+{"ts": "2026-07-20T03:45:41.597749+00:00", "agent": "eval", "event": "scoreBoard", "data": {"ok": false, "score": 0.3, "improved": false}}
+{"ts": "2026-07-20T03:45:41.604806+00:00", "agent": "eval", "event": "adminReg", "data": {"ok": true, "score": 0.75, "improved": false}}
+{"ts": "2026-07-20T03:45:41.607403+00:00", "agent": "eval", "event": "basketIdor", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:41.609012+00:00", "agent": "eval", "event": "forgedFeedback", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:41.615174+00:00", "agent": "eval", "event": "jwt", "data": {"ok": false, "score": 0.44999999999999996, "improved": false}}
+{"ts": "2026-07-20T03:45:41.622407+00:00", "agent": "eval", "event": "dirListing", "data": {"ok": true, "score": 0.6, "improved": false}}
+{"ts": "2026-07-20T03:45:41.627466+00:00", "agent": "eval", "event": "exposedMetrics", "data": {"ok": false, "score": 0.44999999999999996, "improved": false}}
+{"ts": "2026-07-20T03:45:41.641569+00:00", "agent": "eval", "event": "loginAdmin", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:41.642977+00:00", "agent": "eval", "event": "unionSql", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:41.651276+00:00", "agent": "eval", "event": "domXss", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:41.651276+00:00", "agent": "eval", "event": "scoreBoard", "data": {"ok": true, "score": 0.75, "improved": true}}
+{"ts": "2026-07-20T03:45:41.657627+00:00", "agent": "eval", "event": "adminReg", "data": {"ok": true, "score": 1.0, "improved": true}}
+{"ts": "2026-07-20T03:45:41.662528+00:00", "agent": "eval", "event": "basketIdor", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:41.672902+00:00", "agent": "eval", "event": "forgedFeedback", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:41.677330+00:00", "agent": "eval", "event": "jwt", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:41.682189+00:00", "agent": "eval", "event": "dirListing", "data": {"ok": true, "score": 0.8999999999999999, "improved": true}}
+{"ts": "2026-07-20T03:45:41.687395+00:00", "agent": "eval", "event": "exposedMetrics", "data": {"ok": true, "score": 0.75, "improved": true}}

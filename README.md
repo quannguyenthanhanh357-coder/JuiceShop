@@ -53,9 +53,10 @@ Không cần `OPENAI_API_KEY` — agents trả JSON deterministic.
 pip install -r requirements.txt
 python scripts/seed_sample_reports.py
 python rag/ingest.py && python rag/evaluate_retrieval.py
-python agents/run_syndicate.py          # auto HITL
-python agents/eval_pipeline.py
+python agents/run_syndicate.py          # auto HITL + injection probes
+python agents/eval_pipeline.py --both
 python scripts/test_kong_iam.py         # cần compose up
+python scripts/finops_report.py
 ```
 
 API keys Kong demo: `recon-key-demo` (GET), `exploit-key-demo` (POST).
@@ -66,19 +67,19 @@ API keys Kong demo: `recon-key-demo` (GET), `exploit-key-demo` (POST).
 |---|---|---|
 | 0 | Clone Juice Shop + Compose | ✅ Done |
 | 1 | SAST/DAST CI + parse + Attack Surface + seed reports | ✅ CI verified + demo |
-| 2 | Kong IAM + `test_kong_iam.py` + MCP stub | ✅ Skeleton + demo |
-| 3 | RAG ingest / hybrid / retrieval eval | ✅ Skeleton + demo (BOW fallback) |
-| 4 | Recon Agent → Attack Surface Map | ✅ Skeleton + demo (mock LLM) |
-| 5 | Fuzz Agent qua Kong rate-limit | ✅ Skeleton + demo |
-| 6 | Multi-agent Supervisor + traces | ✅ Skeleton + demo |
-| 7 | Indirect prompt injection + guardrails | ✅ Skeleton + demo |
-| 8 | HITL CLI approve/reject | ✅ Skeleton + demo |
-| 9 | PII redaction | ✅ Skeleton + demo |
-| 10 | Eval pipeline 10 challenges | ✅ Skeleton + demo |
-| 11 | Full Compose + FinOps + Runbook | ✅ Skeleton + demo |
-| 12 | PRD + Business Case | ✅ Skeleton + demo |
+| 2 | Kong IAM + `test_kong_iam.py` + MCP stub | ✅ Verified demo |
+| 3 | RAG ingest / hybrid / retrieval eval | ✅ P@3+MRR (BOW+BM25) |
+| 4 | Recon Agent → Attack Surface Map | ✅ DB-driven + vs manual |
+| 5 | Fuzz Agent qua Kong rate-limit | ✅ Mutate-on-anomaly |
+| 6 | Multi-agent Supervisor + traces | ✅ File traces |
+| 7 | Indirect prompt injection + guardrails | ✅ Before/after artifacts |
+| 8 | HITL CLI approve/reject | ✅ Approve + reject demo |
+| 9 | PII redaction | ✅ In traces + GDPR note |
+| 10 | Eval pipeline 10 challenges | ✅ Non-circular + improve loop |
+| 11 | Full Compose + FinOps + Runbook | ✅ CSV FinOps |
+| 12 | PRD + Business Case | ✅ + DEMO_CHECKLIST |
 
-Chi tiết nhật ký: `docs/notes/TIEN_DO.md`. Runbook: `docs/RUNBOOK.md`.
+Chi tiết nhật ký: `docs/notes/TIEN_DO.md`. Demo: `docs/DEMO_CHECKLIST.md`. Runbook: `docs/RUNBOOK.md`.
 
 **Tài liệu kiến thức Security (HTML):** mở file
 `C:\Users\ADMIN\Desktop\VInSOC\Project_Sentinel_Kien_Thuc_Security.html` trên trình duyệt.

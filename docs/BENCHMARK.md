@@ -1,15 +1,22 @@
 # Benchmark — Eval Juice Shop Challenges (Tuần 10)
 
-Chạy:
-
 ```bash
-python agents/eval_pipeline.py
-# → data-lake/eval_report.json
+python agents/eval_pipeline.py --both
+# → data-lake/eval_report.json (baseline)
+# → data-lake/eval_report_improved.json
+# → data-lake/eval_improvement.json
 ```
+
+## Cách chấm (không circular)
+
+1. Gom **corpus** từ `attack_surface_map.json` + `vuln_data.db` + fuzz + excerpt `ATTACK_SURFACE.md`.
+2. Hypothesis = keyword hits trên corpus (baseline vs improved synonym map) — **không** copy sẵn `GROUND_TRUTH.signals` vào output.
+3. Detect khi có matched keywords **và** ≥1 ground-truth signal xuất hiện trong hypothesis text.
+4. FP = `detected_candidate` nhưng `signal_hits == 0`.
 
 ## Ground truth (10 challenges)
 
-| # | Challenge | Signals kỳ vọng |
+| # | Challenge | Signals |
 |---|---|---|
 | 1 | Login Admin | admin, login, password |
 | 2 | Union SQL Injection | sql, union, search |
@@ -22,22 +29,27 @@ python agents/eval_pipeline.py
 | 9 | Directory Listing FTP | ftp, directory |
 | 10 | Exposed Metrics | metrics, prometheus |
 
-## Cách chấm
+## Vòng cải thiện prompt/rule
 
-1. Agent hypothesis (MOCK JSON).  
-2. LLM-as-judge (MOCK) + rule: ≥1 signal trong output.  
-3. `final_score >= 0.6` → detected.
+| Mode | Keyword map |
+|---|---|
+| baseline | `BASELINE_KEYWORDS` trong `eval_pipeline.py` |
+| improved | thêm path aliases / CWE synonyms (`IMPROVED_KEYWORDS`) |
 
-## Kỳ vọng demo (MOCK)
+Ghi `eval_improvement.json`: `delta = improved_detect_rate - baseline_detect_rate`.
 
-Detect rate thường **≥ 80%** vì mock + rule bám signals.
-Với OpenAI thật: so sánh lại và chỉnh prompt Recon nếu FP/FN cao.
+Ví dụ lần verify local (MOCK, corpus map+DB vs +ATTACK_SURFACE note):
+
+| Mode | Detect | FP |
+|---|---|---|
+| baseline | 70% (7/10) | 0 |
+| improved | 100% (10/10) | 0 |
+| **delta** | **+30%** | — |
 
 ## Retrieval (RAG)
 
 ```bash
 python rag/evaluate_retrieval.py
-# → rag/store/retrieval_eval.json
 ```
 
-Mục tiêu: ≥ 8/10 câu hỏi gold có doc đúng trong top-3 (hybrid).
+Metrics: accuracy, **Precision@3**, **MRR** (hybrid BOW+BM25).

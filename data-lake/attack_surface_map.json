@@ -1,34 +1,120 @@
 {
-  "mock": true,
-  "id": "732df7e3",
+  "source": "vuln_data.db+baseline",
   "endpoints": [
     {
-      "path": "/rest/products/search",
-      "method": "GET",
+      "path": "/",
+      "method": "GET/POST",
       "risk": "high",
-      "issue": "SQL Injection",
-      "cve_related": [
-        "CWE-89"
-      ]
+      "issue": "Absence of Anti-CSRF Tokens; Absence of Anti-CSRF Tokens; Storable but Non-Cacheable Content",
+      "cve_related": [],
+      "sources": [
+        "OWASP ZAP (DAST)"
+      ],
+      "count": 10
     },
     {
       "path": "/api/Users",
       "method": "POST",
       "risk": "high",
-      "issue": "Broken Access Control / mass assignment",
+      "issue": "Mass assignment / register admin",
       "cve_related": [
         "CWE-284"
-      ]
+      ],
+      "sources": [
+        "baseline"
+      ],
+      "count": 0
+    },
+    {
+      "path": "/rest/products/search",
+      "method": "GET",
+      "risk": "high",
+      "issue": "Cross Site Scripting (Reflected); SQL Injection; javascript.lang.security.audit.sqli.node-sqli",
+      "cve_related": [
+        "CWE-89"
+      ],
+      "sources": [
+        "OWASP ZAP (DAST)",
+        "Semgrep (SAST)"
+      ],
+      "count": 11
     },
     {
       "path": "/api/Feedbacks",
-      "method": "POST",
+      "method": "GET/POST",
       "risk": "medium",
-      "issue": "Stored XSS",
+      "issue": "javascript.express.security.audit.xss.pug.explicit-unescape.template-explicit-unescape",
+      "cve_related": [],
+      "sources": [
+        "Semgrep (SAST)"
+      ],
+      "count": 1
+    },
+    {
+      "path": "/ftp/",
+      "method": "GET",
+      "risk": "medium",
+      "issue": "Directory listing",
       "cve_related": [
-        "CWE-79"
-      ]
+        "CWE-548"
+      ],
+      "sources": [
+        "baseline"
+      ],
+      "count": 0
+    },
+    {
+      "path": "/main.js",
+      "method": "GET/POST",
+      "risk": "low",
+      "issue": "Dangerous JS Functions",
+      "cve_related": [],
+      "sources": [
+        "OWASP ZAP (DAST)"
+      ],
+      "count": 1
+    },
+    {
+      "path": "/metrics",
+      "method": "GET",
+      "risk": "low",
+      "issue": "Exposed metrics",
+      "cve_related": [],
+      "sources": [
+        "baseline"
+      ],
+      "count": 0
+    },
+    {
+      "path": "/rest/basket/{id}",
+      "method": "GET",
+      "risk": "medium",
+      "issue": "IDOR basket",
+      "cve_related": [
+        "CWE-639"
+      ],
+      "sources": [
+        "baseline"
+      ],
+      "count": 0
+    },
+    {
+      "path": "/robots.txt",
+      "method": "GET/POST",
+      "risk": "medium",
+      "issue": "Storable and Cacheable Content",
+      "cve_related": [],
+      "sources": [
+        "OWASP ZAP (DAST)"
+      ],
+      "count": 1
     }
   ],
-  "summary": "Juice Shop local: SQLi search, XSS feedback, weak admin registration."
+  "summary": "DB-driven map: 9 endpoints from 40 vuln rows + baseline.",
+  "vuln_rows_used": 40,
+  "llm_enrich": true,
+  "llm_summary": "Merged 1 endpoints from DB/vulns (mock enrich).",
+  "mock_enrich": true,
+  "rag_hits": 3,
+  "guardrail_on_ftp": true
 }

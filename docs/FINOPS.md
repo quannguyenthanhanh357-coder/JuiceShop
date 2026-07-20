@@ -2,30 +2,40 @@
 
 ## Nguyên tắc
 
-- Mặc định **MOCK LLM** → $0 token.  
-- Bật OpenAI chỉ khi demo cần chất lượng thật.  
+- Mặc định **MOCK LLM** → $0 token.
+- Bật OpenAI chỉ khi demo cần chất lượng thật.
 - Không thuê GPU cloud cho thực tập.
 
-## Đo chi phí (ước lượng)
+## Telemetry
 
-| Hoạt động | Token TB (input+output) | Cost @ $0.15/1M in + $0.60/1M out (ví dụ) |
+`LLMClient` ghi vào traces:
+
+- `est_tokens_in` / `est_tokens_out` (~4 chars/token)
+- `est_cost_usd` (MOCK = 0; real dùng `SENTINEL_COST_IN_PER_1M` / `OUT`)
+
+```bash
+python scripts/finops_report.py
+# → data-lake/finops_weekly.csv
+# ALERT nếu tổng est_cost_usd > SENTINEL_COST_ALERT_USD (mặc định 5)
+```
+
+## Ước lượng (khi dùng API)
+
+| Hoạt động | Token TB | Cost ví dụ |
 |---|---|---|
 | 1× Recon | ~2k | < $0.01 |
-| 1× Fuzz plan | ~1k | < $0.01 |
-| 1× Eval 10 cases | ~15k | ~$0.01–0.02 |
 | Full syndicate + eval | ~25k | ~$0.02–0.05 |
-
-Ghi log token thật khi có API: thêm field trong `data-lake/traces/` (LLM client đã trace request/response length).
 
 ## Monitoring tối giản
 
-- Trace file: `data-lake/traces/*.jsonl` (latency cảm nhận = timestamp)  
-- Compose: `docker stats sentinel-juice-shop sentinel-kong`  
-- Alert thủ công: nếu chi phí tuần > $5 → tắt API key, về MOCK  
+- Trace JSONL: `data-lake/traces/`
+- CSV FinOps: `data-lake/finops_weekly.csv`
+- Compose: `docker stats sentinel-juice-shop sentinel-kong`
+- Alert: script exit code 2 nếu vượt ngưỡng — tắt API key, về MOCK
 
 ## Tối ưu
 
-1. Tóm tắt vuln trước khi đưa vào prompt (recon đã truncate 6000 chars).  
-2. Giới hạn fuzz `--max`.  
-3. Cache RAG ingest; không embed lại mỗi lần.  
-4. Rate-limit Kong giảm spam request.
+1. Truncate vuln context trong recon.  
+2. `--max` / `--mutate` giới hạn fuzz.  
+3. Cache RAG ingest.  
+4. Kong write rate-limit + client sleep GET.

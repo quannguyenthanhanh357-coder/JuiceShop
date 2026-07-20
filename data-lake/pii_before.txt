@@ -1,0 +1,1 @@
+User jane.doe@juiceshop.local phone 555-123-4567 SSN 123-45-6789 bought Apple Juice.

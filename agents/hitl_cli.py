@@ -24,15 +24,27 @@ def _log(decision: str, title: str, details: str) -> None:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
-def request_approval(title: str, details: str, auto_approve: bool = False) -> bool:
+def request_approval(
+    title: str,
+    details: str,
+    auto_approve: bool = False,
+    *,
+    auto_reject: bool = False,
+) -> bool:
     """
     Trả True nếu approve.
     auto_approve=True dùng cho demo/CI offline.
+    auto_reject=True ghi reject mà không hỏi (Week 8 evidence).
     """
     print("\n========== HITL APPROVAL ==========")
     print(f"Title: {title}")
     print(details[:2000])
     print("===================================")
+
+    if auto_reject:
+        print("[HITL] auto-reject (demo evidence)")
+        _log("reject", title, details)
+        return False
 
     if auto_approve:
         print("[HITL] auto-approve (--yes / demo mode)")
@@ -50,5 +62,17 @@ def request_approval(title: str, details: str, auto_approve: bool = False) -> bo
 
 
 if __name__ == "__main__":
-    ok = request_approval("Demo", '{"action":"sqli_probe"}', auto_approve=True)
+    import argparse
+
+    p = argparse.ArgumentParser()
+    p.add_argument("--reject-demo", action="store_true", help="Ghi 1 quyết định reject vào hitl_decisions.jsonl")
+    args = p.parse_args()
+    if args.reject_demo:
+        ok = request_approval(
+            "Demo reject",
+            '{"action":"sqli_probe","dangerous":true}',
+            auto_reject=True,
+        )
+    else:
+        ok = request_approval("Demo", '{"action":"sqli_probe"}', auto_approve=True)
     print("result", ok)

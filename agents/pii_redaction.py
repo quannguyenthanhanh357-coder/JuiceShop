@@ -32,8 +32,14 @@ def demo() -> None:
         "User jane.doe@juiceshop.local phone 555-123-4567 SSN 123-45-6789 "
         "bought Apple Juice."
     )
+    after = redact(sample)
     print("BEFORE:", sample)
-    print("AFTER: ", redact(sample))
+    print("AFTER: ", after)
+    lake = Path(__file__).resolve().parent.parent / "data-lake"
+    lake.mkdir(parents=True, exist_ok=True)
+    (lake / "pii_before.txt").write_text(sample + "\n", encoding="utf-8")
+    (lake / "pii_after.txt").write_text(after + "\n", encoding="utf-8")
+    print(f"[+] Wrote {lake / 'pii_before.txt'} and pii_after.txt")
 
 
 if __name__ == "__main__":

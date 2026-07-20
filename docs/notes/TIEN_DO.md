@@ -1,10 +1,10 @@
 # Tiến độ Project Sentinel
 
-Cập nhật: 2026-07-20
+Cập nhật: 2026-07-20 (honest-done pass)
 
 ## Kết luận ngắn
 
-**Tuần 0–12 đã có skeleton + demo local.** LLM mặc định **MOCK** (không cần `OPENAI_API_KEY`) — phản hồi JSON deterministic để chạy offline. Traffic agent chỉ qua Kong `localhost:8000`.
+**Tuần 0–12: verified demo local + CI.** LLM mặc định **MOCK**. Guardrails/PII/HITL/eval improvement/FinOps CSV đã nối vào pipeline. Traffic agent qua Kong `localhost:8000`.
 
 ## Chi tiết theo tuần
 
@@ -17,48 +17,45 @@ Cập nhật: 2026-07-20
 ### Tuần 1 — SAST/DAST + CI/CD
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| CI Semgrep/ZAP | ✅ verified | Run [29714467839](https://github.com/quannguyenthanhanh357-coder/JuiceShop/actions/runs/29714467839) — Semgrep+ZAP success; artifacts trong `data-lake/ci-artifacts/` |
-| `parse_results.py` + seed reports | ✅ | CI reports → `data-lake/vuln_data.db` (Semgrep+ZAP) |
-| `ATTACK_SURFACE.md` | ✅ | `docs/notes/` |
+| CI Semgrep/ZAP | ✅ verified | [Run 29714467839](https://github.com/quannguyenthanhanh357-coder/JuiceShop/actions/runs/29714467839) |
+| `parse_results.py` + seed | ✅ | → `vuln_data.db` |
+| `ATTACK_SURFACE.md` | ✅ | |
 
 ### Tuần 2 — Kong & IAM
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| Kong db-less trong Compose | ✅ | port 8000 |
-| recon / exploit API keys + ACL | ✅ | `kong/kong.yml` |
-| `test_kong_iam.py` | ✅ | |
-| MCP stub `get_scan_results` | ✅ | `agents/mcp_server_stub.py` |
+| Kong + keys ACL | ✅ | `kong/kong.yml` |
+| `test_kong_iam.py` | ✅ | proof: `docs/notes/KONG_IAM_PROOF.md` |
+| MCP stub | ✅ | |
 
 ### Tuần 3 — RAG
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| ingest / query / hybrid / eval | ✅ | Chroma optional → BOW+BM25 fallback |
-| 10-question retrieval eval | ✅ | `rag/evaluate_retrieval.py` |
+| ingest / hybrid BOW+BM25 | ✅ | Recon dùng `hybrid_search` |
+| Eval accuracy + P@3 + MRR | ✅ | `rag/evaluate_retrieval.py` |
 
 ### Tuần 4–6 — Agents
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| Recon / Fuzz / Exploit / Supervisor | ✅ | mock LLM |
-| Traces `data-lake/traces/` | ✅ | |
-| `run_syndicate.py` E2E | ✅ | |
+| Recon DB-driven + so sánh manual | ✅ | `RECON_VS_MANUAL.md` |
+| Fuzz mutate-on-anomaly | ✅ | + `KONG_RATE_LIMIT_PROOF.md` |
+| Supervisor + file traces | ✅ | `docs/notes/TRACING.md` |
 
 ### Tuần 7–9 — Bảo vệ AI
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| FTP indirect injection file | ✅ | `juice-shop/ftp/sentinel_indirect_injection.txt` |
-| Guardrails | ✅ | regex + classifier |
-| HITL CLI | ✅ | |
-| PII redaction | ✅ | email/phone/SSN |
+| Injection before/after | ✅ | `injection_before.json` / `after.json` |
+| HITL approve + reject | ✅ | `--reject-demo` |
+| PII trong traces + GDPR note | ✅ | `docs/PII_GDPR_NOTE.md` |
 
 ### Tuần 10–12 — LLMOps & bàn giao
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| Eval 10 challenges | ✅ | mock judge |
-| FinOps + Runbook | ✅ | `docs/` |
-| PRD + Business Case + Benchmark | ✅ | |
+| Eval non-circular + improvement | ✅ | `eval_improvement.json` |
+| FinOps CSV + alert threshold | ✅ | `scripts/finops_report.py` |
+| PRD / Business / Demo checklist | ✅ | `docs/DEMO_CHECKLIST.md` |
 
 ## Mock mode
 
 - Không set `OPENAI_API_KEY` → `LLMClient.mock = True`.
-- Set key → dùng OpenAI (`openai` package).
-- Demo đầy đủ: xem `docs/RUNBOOK.md`.
+- Demo: `docs/DEMO_CHECKLIST.md` + `docs/RUNBOOK.md`.

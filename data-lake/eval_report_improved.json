@@ -1,9 +1,9 @@
 {
-  "mode": "baseline",
-  "detect_rate": 0.7,
-  "detected": 7,
+  "mode": "improved",
+  "detect_rate": 1.0,
+  "detected": 10,
   "total": 10,
-  "avg_seconds": 0.0050084590911865234,
+  "avg_seconds": 0.005269098281860352,
   "false_positives": 0,
   "false_positive_rate": 0.0,
   "rows": [
@@ -14,18 +14,22 @@
         "detected_candidate": true,
         "matched_keywords": [
           "login",
-          "admin"
+          "admin",
+          "password",
+          "user/login",
+          "authorization",
+          "rest/user"
         ],
-        "evidence": "Corpus keyword hits for Login Admin: ['login', 'admin']",
-        "notes": "login admin",
-        "score": 0.6,
+        "evidence": "Corpus keyword hits for Login Admin: ['login', 'admin', 'password', 'user/login', 'authorization']",
+        "notes": "login admin password user/login authorization rest/user",
+        "score": 1.0,
         "llm_extra": {
           "mock": true,
-          "id": "32ba1b29",
+          "id": "3b8063f4",
           "message": "OK",
-          "echo_hash": "32ba1b29"
+          "echo_hash": "3b8063f4"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -34,9 +38,9 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.6,
-        "final_score": 0.6,
-        "signal_hits": 2,
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3,
         "ok_rule": true
       }
     },
@@ -49,18 +53,57 @@
           "sql",
           "search",
           "injection",
-          "products/search"
+          "union",
+          "products/search",
+          "sqlite",
+          "sequelize",
+          "cwe-89"
         ],
-        "evidence": "Corpus keyword hits for Union SQL Injection: ['sql', 'search', 'injection', 'products/search']",
-        "notes": "sql search injection products/search",
+        "evidence": "Corpus keyword hits for Union SQL Injection: ['sql', 'search', 'injection', 'union', 'products/search']",
+        "notes": "sql search injection union products/search sqlite sequelize cwe-89",
+        "score": 1.0,
+        "llm_extra": {
+          "mock": true,
+          "id": "f1a286d9",
+          "message": "OK",
+          "echo_hash": "f1a286d9"
+        },
+        "mode": "improved"
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3,
+        "ok_rule": true
+      }
+    },
+    {
+      "challenge": "DOM XSS",
+      "ok": true,
+      "hyp": {
+        "detected_candidate": true,
+        "matched_keywords": [
+          "xss",
+          "script",
+          "search",
+          "feedback"
+        ],
+        "evidence": "Corpus keyword hits for DOM XSS: ['xss', 'script', 'search', 'feedback']",
+        "notes": "xss script search feedback",
         "score": 0.8999999999999999,
         "llm_extra": {
           "mock": true,
-          "id": "ce9b4f84",
+          "id": "d6ca1e92",
           "message": "OK",
-          "echo_hash": "ce9b4f84"
+          "echo_hash": "d6ca1e92"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -76,89 +119,25 @@
       }
     },
     {
-      "challenge": "DOM XSS",
-      "ok": true,
-      "hyp": {
-        "detected_candidate": true,
-        "matched_keywords": [
-          "xss",
-          "script",
-          "search"
-        ],
-        "evidence": "Corpus keyword hits for DOM XSS: ['xss', 'script', 'search']",
-        "notes": "xss script search",
-        "score": 0.75,
-        "llm_extra": {
-          "mock": true,
-          "id": "efd5e291",
-          "message": "OK",
-          "echo_hash": "efd5e291"
-        },
-        "mode": "baseline"
-      },
-      "judge": {
-        "llm_judge": {
-          "mock": true,
-          "score": 0.85,
-          "verdict": "partial_match",
-          "reason": "Mock judge: endpoint/risk aligned."
-        },
-        "rule_score": 0.75,
-        "final_score": 0.75,
-        "signal_hits": 3,
-        "ok_rule": true
-      }
-    },
-    {
       "challenge": "Score Board",
-      "ok": false,
-      "hyp": {
-        "detected_candidate": false,
-        "matched_keywords": [],
-        "evidence": "Corpus keyword hits for Score Board: []",
-        "notes": "",
-        "score": 0.3,
-        "llm_extra": {
-          "mock": true,
-          "id": "24a6c565",
-          "message": "OK",
-          "echo_hash": "24a6c565"
-        },
-        "mode": "baseline"
-      },
-      "judge": {
-        "llm_judge": {
-          "mock": true,
-          "score": 0.85,
-          "verdict": "partial_match",
-          "reason": "Mock judge: endpoint/risk aligned."
-        },
-        "rule_score": 0.3,
-        "final_score": 0.3,
-        "signal_hits": 1,
-        "ok_rule": false
-      }
-    },
-    {
-      "challenge": "Admin Registration",
       "ok": true,
       "hyp": {
         "detected_candidate": true,
         "matched_keywords": [
-          "users",
-          "register",
-          "mass assignment"
+          "score",
+          "challenge",
+          "api/challenges"
         ],
-        "evidence": "Corpus keyword hits for Admin Registration: ['users', 'register', 'mass assignment']",
-        "notes": "users register mass assignment",
+        "evidence": "Corpus keyword hits for Score Board: ['score', 'challenge', 'api/challenges']",
+        "notes": "score challenge api/challenges",
         "score": 0.75,
         "llm_extra": {
           "mock": true,
-          "id": "4bc316fe",
+          "id": "4706ffec",
           "message": "OK",
-          "echo_hash": "4bc316fe"
+          "echo_hash": "4706ffec"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -174,24 +153,27 @@
       }
     },
     {
-      "challenge": "View Another User's Basket",
+      "challenge": "Admin Registration",
       "ok": true,
       "hyp": {
         "detected_candidate": true,
         "matched_keywords": [
-          "basket",
-          "idor"
+          "users",
+          "register",
+          "role",
+          "mass assignment",
+          "api/users"
         ],
-        "evidence": "Corpus keyword hits for View Another User's Basket: ['basket', 'idor']",
-        "notes": "basket idor",
-        "score": 0.6,
+        "evidence": "Corpus keyword hits for Admin Registration: ['users', 'register', 'role', 'mass assignment', 'api/users']",
+        "notes": "users register role mass assignment api/users",
+        "score": 1.0,
         "llm_extra": {
           "mock": true,
-          "id": "16cf5b1c",
+          "id": "c179ad5c",
           "message": "OK",
-          "echo_hash": "16cf5b1c"
+          "echo_hash": "c179ad5c"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -200,8 +182,43 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.6,
-        "final_score": 0.6,
+        "rule_score": 1.0,
+        "final_score": 1.0,
+        "signal_hits": 3,
+        "ok_rule": true
+      }
+    },
+    {
+      "challenge": "View Another User's Basket",
+      "ok": true,
+      "hyp": {
+        "detected_candidate": true,
+        "matched_keywords": [
+          "basket",
+          "idor",
+          "rest/basket",
+          "cwe-639"
+        ],
+        "evidence": "Corpus keyword hits for View Another User's Basket: ['basket', 'idor', 'rest/basket', 'cwe-639']",
+        "notes": "basket idor rest/basket cwe-639",
+        "score": 0.8999999999999999,
+        "llm_extra": {
+          "mock": true,
+          "id": "4352dae5",
+          "message": "OK",
+          "echo_hash": "4352dae5"
+        },
+        "mode": "improved"
+      },
+      "judge": {
+        "llm_judge": {
+          "mock": true,
+          "score": 0.85,
+          "verdict": "partial_match",
+          "reason": "Mock judge: endpoint/risk aligned."
+        },
+        "rule_score": 0.8999999999999999,
+        "final_score": 0.8999999999999999,
         "signal_hits": 2,
         "ok_rule": true
       }
@@ -213,18 +230,20 @@
         "detected_candidate": true,
         "matched_keywords": [
           "feedback",
-          "xss"
+          "xss",
+          "api/feedbacks",
+          "stored"
         ],
-        "evidence": "Corpus keyword hits for Forged Feedback: ['feedback', 'xss']",
-        "notes": "feedback xss",
-        "score": 0.6,
+        "evidence": "Corpus keyword hits for Forged Feedback: ['feedback', 'xss', 'api/feedbacks', 'stored']",
+        "notes": "feedback xss api/feedbacks stored",
+        "score": 0.8999999999999999,
         "llm_extra": {
           "mock": true,
-          "id": "97727b80",
+          "id": "dde1929b",
           "message": "OK",
-          "echo_hash": "97727b80"
+          "echo_hash": "dde1929b"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -233,30 +252,33 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.6,
-        "final_score": 0.6,
+        "rule_score": 0.8999999999999999,
+        "final_score": 0.8999999999999999,
         "signal_hits": 2,
         "ok_rule": true
       }
     },
     {
       "challenge": "JWT Issues",
-      "ok": false,
+      "ok": true,
       "hyp": {
         "detected_candidate": true,
         "matched_keywords": [
-          "token"
+          "jwt",
+          "token",
+          "bearer",
+          "role"
         ],
-        "evidence": "Corpus keyword hits for JWT Issues: ['token']",
-        "notes": "token",
-        "score": 0.44999999999999996,
+        "evidence": "Corpus keyword hits for JWT Issues: ['jwt', 'token', 'bearer', 'role']",
+        "notes": "jwt token bearer role",
+        "score": 0.8999999999999999,
         "llm_extra": {
           "mock": true,
-          "id": "43327271",
+          "id": "9e5c1aa2",
           "message": "OK",
-          "echo_hash": "43327271"
+          "echo_hash": "9e5c1aa2"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -265,9 +287,9 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.44999999999999996,
-        "final_score": 0.44999999999999996,
-        "signal_hits": 2,
+        "rule_score": 0.8999999999999999,
+        "final_score": 0.8999999999999999,
+        "signal_hits": 3,
         "ok_rule": true
       }
     },
@@ -278,18 +300,20 @@
         "detected_candidate": true,
         "matched_keywords": [
           "ftp",
-          "directory"
+          "directory",
+          "/ftp",
+          "listing"
         ],
-        "evidence": "Corpus keyword hits for Directory Listing FTP: ['ftp', 'directory']",
-        "notes": "ftp directory",
-        "score": 0.6,
+        "evidence": "Corpus keyword hits for Directory Listing FTP: ['ftp', 'directory', '/ftp', 'listing']",
+        "notes": "ftp directory /ftp listing",
+        "score": 0.8999999999999999,
         "llm_extra": {
           "mock": true,
-          "id": "aab182a7",
+          "id": "b2b26b18",
           "message": "OK",
-          "echo_hash": "aab182a7"
+          "echo_hash": "b2b26b18"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -298,30 +322,32 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.6,
-        "final_score": 0.6,
+        "rule_score": 0.8999999999999999,
+        "final_score": 0.8999999999999999,
         "signal_hits": 2,
         "ok_rule": true
       }
     },
     {
       "challenge": "Exposed Metrics",
-      "ok": false,
+      "ok": true,
       "hyp": {
         "detected_candidate": true,
         "matched_keywords": [
-          "metrics"
+          "metrics",
+          "prometheus",
+          "/metrics"
         ],
-        "evidence": "Corpus keyword hits for Exposed Metrics: ['metrics']",
-        "notes": "metrics",
-        "score": 0.44999999999999996,
+        "evidence": "Corpus keyword hits for Exposed Metrics: ['metrics', 'prometheus', '/metrics']",
+        "notes": "metrics prometheus /metrics",
+        "score": 0.75,
         "llm_extra": {
           "mock": true,
-          "id": "22bc705d",
+          "id": "53d55e97",
           "message": "OK",
-          "echo_hash": "22bc705d"
+          "echo_hash": "53d55e97"
         },
-        "mode": "baseline"
+        "mode": "improved"
       },
       "judge": {
         "llm_judge": {
@@ -330,9 +356,9 @@
           "verdict": "partial_match",
           "reason": "Mock judge: endpoint/risk aligned."
         },
-        "rule_score": 0.44999999999999996,
-        "final_score": 0.44999999999999996,
-        "signal_hits": 1,
+        "rule_score": 0.75,
+        "final_score": 0.75,
+        "signal_hits": 2,
         "ok_rule": true
       }
     }

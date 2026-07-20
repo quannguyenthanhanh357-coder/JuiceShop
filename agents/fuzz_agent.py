@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Tuần 5 — Fuzz Agent: HTTP chỉ qua Kong localhost:8000, rate-limited.
-Payload giáo dục/demo — không nhắm host ngoài.
+Tuần 5 — Fuzz Agent: HTTP chỉ qua Kong localhost:8000.
+Mutate-on-anomaly + targets từ attack_surface_map.json.
 """
 from __future__ import annotations
 
@@ -28,12 +28,19 @@ try:
 except ImportError:
     requests = None  # type: ignore
 
-# Payload demo an toàn — chỉ dùng với localhost
 DEMO_PAYLOADS = [
     "'",
     "' OR 1=1--",
     "<script>alert(1)</script>",
     "' UNION SELECT null--",
+]
+
+MUTATORS = [
+    lambda v: v + "'",
+    lambda v: v.replace("--", "/*"),
+    lambda v: v + " UNION SELECT 1,2,3--",
+    lambda v: v.replace("1=1", "1=1 AND 'a'='a"),
+    lambda v: "' OR '1'='1' --",
 ]
 
 
@@ -61,7 +68,34 @@ def kong_get(path: str, params: dict | None = None) -> dict:
         return {"url": url, "status": 0, "error": str(e), "anomaly": True}
 
 
-def run_fuzz(map_path: Path | None = None, max_requests: int = 8) -> list[dict]:
+def payloads_from_surface(surface: dict) -> list[dict]:
+    out = []
+    for ep in surface.get("endpoints") or []:
+        path = ep.get("path") or ""
+        method = (ep.get("method") or "GET").upper()
+        if not path.startswith("/") or "{" in path:
+            continue
+        if "POST" in method and "GET" not in method:
+            continue  # GET fuzz only with recon key
+        if "search" in path or path == "/rest/products/search":
+            for p in DEMO_PAYLOADS[:3]:
+                out.append({"target": "/rest/products/search", "param": "q", "value": p})
+        elif path.startswith("/ftp"):
+            out.append({"target": "/ftp/", "param": "", "value": ""})
+        elif path == "/metrics":
+            out.append({"target": "/metrics", "param": "", "value": ""})
+    return out
+
+
+def mutate_value(value: str, round_i: int) -> str:
+    fn = MUTATORS[round_i % len(MUTATORS)]
+    try:
+        return fn(value)
+    except Exception:
+        return value + "'"
+
+
+def run_fuzz(map_path: Path | None = None, max_requests: int = 12, max_mutate: int = 2) -> list[dict]:
     map_path = map_path or (ROOT / "data-lake" / "attack_surface_map.json")
     surface = {}
     if map_path.exists():
@@ -75,45 +109,68 @@ def run_fuzz(map_path: Path | None = None, max_requests: int = 8) -> list[dict]:
     except Exception:
         payloads = []
 
+    from_map = payloads_from_surface(surface)
+    if from_map:
+        payloads = from_map + list(payloads)
     if not payloads:
-        payloads = [
-            {"target": "/rest/products/search", "param": "q", "value": p} for p in DEMO_PAYLOADS
-        ]
+        payloads = [{"target": "/rest/products/search", "param": "q", "value": p} for p in DEMO_PAYLOADS]
 
     findings = []
-    for i, p in enumerate(payloads):
-        if i >= max_requests:
+    n = 0
+    for p in payloads:
+        if n >= max_requests:
             break
-        # Chỉ cho phép path local tương đối
         target = p.get("target", "/rest/products/search")
         if not target.startswith("/"):
             continue
         if "localhost" not in KONG_BASE and "127.0.0.1" not in KONG_BASE:
             write_trace("fuzz", "blocked_non_local", {"base": KONG_BASE})
             break
-        param = p.get("param", "q")
+        param = p.get("param") or "q"
         value = str(p.get("value", ""))
-        result = kong_get(target, {param: value})
+        params = {param: value} if param else None
+        result = kong_get(target, params)
         result["payload"] = value
+        result["mutations"] = []
         findings.append(result)
         write_trace("fuzz", "probe", result)
-        rate_limit_sleep(0.4)
-        print(f"  [{result.get('status')}] {target}?{param}=... anomaly={result.get('anomaly')}")
+        n += 1
+        print(f"  [{result.get('status')}] {target} anomaly={result.get('anomaly')}")
+        rate_limit_sleep(0.35)
+
+        # Mutate-on-anomaly
+        if result.get("anomaly") and param and value:
+            cur = value
+            for mi in range(max_mutate):
+                if n >= max_requests:
+                    break
+                cur = mutate_value(cur, mi)
+                mres = kong_get(target, {param: cur})
+                mres["payload"] = cur
+                mres["mutated_from"] = value
+                mres["mutation_round"] = mi + 1
+                result["mutations"].append({"payload": cur, "status": mres.get("status"), "anomaly": mres.get("anomaly")})
+                findings.append(mres)
+                write_trace("fuzz", "mutate", mres)
+                n += 1
+                print(f"    mutate#{mi+1} [{mres.get('status')}] anomaly={mres.get('anomaly')}")
+                rate_limit_sleep(0.35)
 
     out = ROOT / "data-lake" / "fuzz_findings.json"
     out.write_text(json.dumps(findings, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[+] Fuzz findings → {out}")
+    print(f"[+] Fuzz findings → {out} ({len(findings)} probes)")
     return findings
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max", type=int, default=8)
+    parser.add_argument("--max", type=int, default=12)
+    parser.add_argument("--mutate", type=int, default=2)
     args = parser.parse_args()
     if "localhost" not in KONG_BASE and "127.0.0.1" not in KONG_BASE:
         print("[!] SENTINEL_KONG phải là localhost — abort")
         sys.exit(2)
-    run_fuzz(max_requests=args.max)
+    run_fuzz(max_requests=args.max, max_mutate=args.mutate)
 
 
 if __name__ == "__main__":

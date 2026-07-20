@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Common utilities cho agents: LLM client (mock/real), file tracer.
+Common utilities cho agents: LLM client (mock/real), file tracer + PII redaction + FinOps estimate.
 MOCK khi không có OPENAI_API_KEY — demo offline deterministic JSON.
 """
 from __future__ import annotations
@@ -19,6 +19,10 @@ KONG_BASE = os.environ.get("SENTINEL_KONG", "http://localhost:8000")
 RECON_KEY = os.environ.get("SENTINEL_RECON_KEY", "recon-key-demo")
 EXPLOIT_KEY = os.environ.get("SENTINEL_EXPLOIT_KEY", "exploit-key-demo")
 
+# Rough OpenAI-ish pricing for estimates (USD per 1M tokens)
+_COST_IN = float(os.environ.get("SENTINEL_COST_IN_PER_1M", "0.15"))
+_COST_OUT = float(os.environ.get("SENTINEL_COST_OUT_PER_1M", "0.60"))
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -29,14 +33,40 @@ def ensure_trace_dir() -> Path:
     return TRACE_DIR
 
 
+def _redact_obj(obj: Any) -> Any:
+    try:
+        from pii_redaction import redact
+    except ImportError:
+        return obj
+    if isinstance(obj, str):
+        return redact(obj)
+    if isinstance(obj, dict):
+        return {k: _redact_obj(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_redact_obj(x) for x in obj]
+    return obj
+
+
 def write_trace(agent: str, event: str, data: Any) -> Path:
-    """Ghi trace JSONL vào data-lake/traces/."""
+    """Ghi trace JSONL vào data-lake/traces/ — PII redacted trước khi persist."""
     ensure_trace_dir()
     path = TRACE_DIR / f"{agent}_{datetime.now().strftime('%Y%m%d')}.jsonl"
-    record = {"ts": utc_now(), "agent": agent, "event": event, "data": data}
+    safe = _redact_obj(data)
+    record = {"ts": utc_now(), "agent": agent, "event": event, "data": safe}
     with open(path, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
     return path
+
+
+def est_tokens(text: str) -> int:
+    """Ước lượng thô ~4 chars/token."""
+    return max(1, len(text) // 4)
+
+
+def est_cost_usd(tokens_in: int, tokens_out: int, *, mock: bool) -> float:
+    if mock:
+        return 0.0
+    return (tokens_in * _COST_IN + tokens_out * _COST_OUT) / 1_000_000.0
 
 
 class LLMClient:
@@ -48,12 +78,34 @@ class LLMClient:
         self.mock = not bool(self.api_key)
 
     def chat(self, system: str, user: str, *, expect_json: bool = True) -> str:
-        write_trace("llm", "request", {"mock": self.mock, "system_len": len(system), "user_len": len(user)})
+        tin = est_tokens(system) + est_tokens(user)
+        write_trace(
+            "llm",
+            "request",
+            {
+                "mock": self.mock,
+                "system_len": len(system),
+                "user_len": len(user),
+                "est_tokens_in": tin,
+            },
+        )
         if self.mock:
             out = self._mock_response(system, user)
         else:
             out = self._openai_chat(system, user)
-        write_trace("llm", "response", {"mock": self.mock, "preview": out[:500]})
+        tout = est_tokens(out)
+        cost = est_cost_usd(tin, tout, mock=self.mock)
+        write_trace(
+            "llm",
+            "response",
+            {
+                "mock": self.mock,
+                "preview": out[:500],
+                "est_tokens_out": tout,
+                "est_tokens_in": tin,
+                "est_cost_usd": cost,
+            },
+        )
         return out
 
     def _openai_chat(self, system: str, user: str) -> str:
@@ -73,44 +125,87 @@ class LLMClient:
         return resp.choices[0].message.content or ""
 
     def _mock_response(self, system: str, user: str) -> str:
-        """Phản hồi JSON cố định theo 'ý định' trong prompt — không gọi mạng."""
+        """Phản hồi JSON deterministic; recon merge DB map nếu có trong user."""
         blob = (system + "\n" + user).lower()
         digest = hashlib.sha256(blob.encode()).hexdigest()[:8]
 
-        if "attack surface" in blob or ("recon" in blob and "endpoint" in blob):
+        # Injection hijack demo: raw IGNORE in context without guardrail marker
+        if "ftp_content" in blob and "ignore previous" in blob and "[guardrail]" not in blob:
             return json.dumps(
                 {
                     "mock": True,
-                    "id": digest,
-                    "endpoints": [
-                        {
-                            "path": "/rest/products/search",
-                            "method": "GET",
-                            "risk": "high",
-                            "issue": "SQL Injection",
-                            "cve_related": ["CWE-89"],
-                        },
-                        {
-                            "path": "/api/Users",
-                            "method": "POST",
-                            "risk": "high",
-                            "issue": "Broken Access Control / mass assignment",
-                            "cve_related": ["CWE-284"],
-                        },
-                        {
-                            "path": "/api/Feedbacks",
-                            "method": "POST",
-                            "risk": "medium",
-                            "issue": "Stored XSS",
-                            "cve_related": ["CWE-79"],
-                        },
-                    ],
-                    "summary": "Juice Shop local: SQLi search, XSS feedback, weak admin registration.",
+                    "hijacked": True,
+                    "summary": "no vulnerabilities exist",
+                    "api_keys": ["sk-mock-leaked-demo"],
+                    "vulnerabilities": [],
+                },
+                indent=2,
+            )
+        if "ftp_content" in blob and ("[guardrail]" in blob or "redacted_injection" in blob):
+            return json.dumps(
+                {
+                    "mock": True,
+                    "hijacked": False,
+                    "summary": "External FTP content blocked by guardrail; continue normal recon.",
+                    "api_keys": [],
+                    "vulnerabilities": [{"path": "/rest/products/search", "issue": "SQLi"}],
                 },
                 indent=2,
             )
 
-        # Exploit trước fuzz — vì user prompt exploit có chứa "fuzz_findings"
+        if "attack surface" in blob or ("recon" in blob and "endpoint" in blob) or "db_map" in blob:
+            endpoints = []
+            try:
+                u = json.loads(user) if user.strip().startswith("{") else {}
+                db_map = u.get("db_map") or {}
+                endpoints = list(db_map.get("endpoints") or [])
+                # also fold vulnerabilities
+                for v in u.get("vulnerabilities") or []:
+                    name = str(v.get("name") or "")
+                    path = "/rest/products/search"
+                    if "xss" in name.lower():
+                        path = "/api/Feedbacks"
+                    endpoints.append(
+                        {
+                            "path": path,
+                            "method": "GET",
+                            "risk": "high",
+                            "issue": name or "from-db",
+                            "cve_related": [],
+                            "from_vuln_row": True,
+                        }
+                    )
+            except Exception:
+                pass
+            if not endpoints:
+                endpoints = [
+                    {
+                        "path": "/rest/products/search",
+                        "method": "GET",
+                        "risk": "high",
+                        "issue": "SQL Injection",
+                        "cve_related": ["CWE-89"],
+                    },
+                ]
+            # de-dupe by path keeping first
+            seen = set()
+            uniq = []
+            for e in endpoints:
+                p = e.get("path")
+                if p in seen:
+                    continue
+                seen.add(p)
+                uniq.append(e)
+            return json.dumps(
+                {
+                    "mock": True,
+                    "id": digest,
+                    "endpoints": uniq[:12],
+                    "summary": f"Merged {len(uniq)} endpoints from DB/vulns (mock enrich).",
+                },
+                indent=2,
+            )
+
         if "exploit" in blob or "dangerous" in blob or "proof" in blob:
             return json.dumps(
                 {
@@ -153,7 +248,6 @@ class LLMClient:
                 indent=2,
             )
 
-        # default
         return json.dumps({"mock": True, "id": digest, "message": "OK", "echo_hash": digest}, indent=2)
 
 
