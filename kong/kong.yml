@@ -79,13 +79,13 @@ services:
           fault_tolerant: true
 
 consumers:
-  - name: recon-agent
+  - username: recon-agent
     keyauth_credentials:
       - key: recon-key-demo
     acls:
       - group: get-only
 
-  - name: exploit-agent
+  - username: exploit-agent
     keyauth_credentials:
       - key: exploit-key-demo
     acls:

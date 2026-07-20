@@ -31,11 +31,18 @@ Project-Sentinel/
 ## Chạy staging
 
 ```bash
-docker compose up -d --build
+# Khuyến nghị: dùng image pin (không build — tránh npm ECONNRESET)
+docker compose up -d
 # http://localhost:3000  — Juice Shop
 # http://localhost:8000  — Kong gateway
 docker compose ps
 docker compose down
+```
+
+Build từ source (chỉ khi sửa `juice-shop/`, VD Tuần 7):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.from-source.yml up -d --build
 ```
 
 ## Python setup & demo offline (MOCK LLM)

@@ -1,14 +1,16 @@
 # Project Sentinel — giả lập deploy staging trên localhost
-# Nhanh (image pin cùng version):  docker compose up -d
-# Build từ source (Tuần 7 sửa code): docker compose up -d --build
-# Juice Shop (debug/ZAP): http://localhost:3000
-# Kong gateway (agent traffic): http://localhost:8000
+#
+# Mặc định (khuyến nghị): kéo image pin — nhanh, tránh lỗi npm network
+#   docker compose up -d
+#
+# Build từ source (Tuần 7 sửa code trong juice-shop/) — nặng, cần mạng ổn:
+#   docker compose -f docker-compose.yml -f docker-compose.from-source.yml up -d --build
+#
+# Juice Shop: http://localhost:3000  |  Kong: http://localhost:8000
 
 services:
   juice-shop:
     image: bkimminich/juice-shop:v20.1.1
-    build:
-      context: ./juice-shop
     container_name: sentinel-juice-shop
     # Giữ 3000 cho ZAP/debug; production-like: agent chỉ gọi qua Kong :8000
     ports:

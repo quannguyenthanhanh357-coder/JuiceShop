@@ -1,0 +1,12 @@
+# Override: build Juice Shop từ source (pin cùng tag image)
+# Dùng khi Tuần 7 sửa code trong juice-shop/ và cần container khớp source.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.from-source.yml up -d --build
+#
+# Nếu npm lỗi ECONNRESET: đợi mạng ổn rồi chạy lại lệnh trên (Docker cache sẽ giúp).
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:v20.1.1
+    build:
+      context: ./juice-shop
