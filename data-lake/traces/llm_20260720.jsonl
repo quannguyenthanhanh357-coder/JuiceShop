@@ -84,3 +84,89 @@
 {"ts": "2026-07-20T02:11:54.556628+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"0125a9d9\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"0125a9d9\"\n}"}}
 {"ts": "2026-07-20T02:11:54.557773+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 383}}
 {"ts": "2026-07-20T02:11:54.558810+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.768684+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 28}}
+{"ts": "2026-07-20T03:28:34.768684+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"538d0d90\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"538d0d90\"\n}"}}
+{"ts": "2026-07-20T03:28:34.768684+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 383}}
+{"ts": "2026-07-20T03:28:34.768684+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 36}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"ee095ab0\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"ee095ab0\"\n}"}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 385}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 24}}
+{"ts": "2026-07-20T03:28:34.773731+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"3acc427e\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"3acc427e\"\n}"}}
+{"ts": "2026-07-20T03:28:34.779206+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 362}}
+{"ts": "2026-07-20T03:28:34.779206+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.781351+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 28}}
+{"ts": "2026-07-20T03:28:34.783376+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"781df326\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"781df326\"\n}"}}
+{"ts": "2026-07-20T03:28:34.784382+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 362}}
+{"ts": "2026-07-20T03:28:34.785485+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 35}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"b79596c0\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"b79596c0\"\n}"}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 392}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 43}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"75f60bfa\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"75f60bfa\"\n}"}}
+{"ts": "2026-07-20T03:28:34.787541+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 380}}
+{"ts": "2026-07-20T03:28:34.793054+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.793054+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 32}}
+{"ts": "2026-07-20T03:28:34.793054+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"ba38aa12\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"ba38aa12\"\n}"}}
+{"ts": "2026-07-20T03:28:34.793054+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 365}}
+{"ts": "2026-07-20T03:28:34.796342+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.798126+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 27}}
+{"ts": "2026-07-20T03:28:34.799165+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"84714ab2\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"84714ab2\"\n}"}}
+{"ts": "2026-07-20T03:28:34.800880+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 356}}
+{"ts": "2026-07-20T03:28:34.800880+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.803090+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 38}}
+{"ts": "2026-07-20T03:28:34.803090+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"12c62bea\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"12c62bea\"\n}"}}
+{"ts": "2026-07-20T03:28:34.803090+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 376}}
+{"ts": "2026-07-20T03:28:34.806308+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:34.806308+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 32}}
+{"ts": "2026-07-20T03:28:34.806308+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"0125a9d9\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"0125a9d9\"\n}"}}
+{"ts": "2026-07-20T03:28:34.806308+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 383}}
+{"ts": "2026-07-20T03:28:34.806308+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:44.967110+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 230, "user_len": 6014}}
+{"ts": "2026-07-20T03:28:44.967110+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"732df7e3\",\n  \"endpoints\": [\n    {\n      \"path\": \"/rest/products/search\",\n      \"method\": \"GET\",\n      \"risk\": \"high\",\n      \"issue\": \"SQL Injection\",\n      \"cve_related\": [\n        \"CWE-89\"\n      ]\n    },\n    {\n      \"path\": \"/api/Users\",\n      \"method\": \"POST\",\n      \"risk\": \"high\",\n      \"issue\": \"Broken Access Control / mass assignment\",\n      \"cve_related\": [\n        \"CWE-284\"\n      ]\n    },\n    {\n      \"path\": \"/api/Feedbacks\",\n      \"method\": \"POST\",\n      \"risk\""}}
+{"ts": "2026-07-20T03:28:44.973702+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 139, "user_len": 543}}
+{"ts": "2026-07-20T03:28:44.973702+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"b72bcdd9\",\n  \"payloads\": [\n    {\n      \"target\": \"/rest/products/search\",\n      \"param\": \"q\",\n      \"value\": \"' OR 1=1--\"\n    },\n    {\n      \"target\": \"/rest/products/search\",\n      \"param\": \"q\",\n      \"value\": \"<script>alert(1)</script>\"\n    },\n    {\n      \"target\": \"/rest/products/search\",\n      \"param\": \"q\",\n      \"value\": \"' UNION SELECT null--\"\n    }\n  ]\n}"}}
+{"ts": "2026-07-20T03:28:47.233481+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 209, "user_len": 1667}}
+{"ts": "2026-07-20T03:28:47.233481+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"fd5e69d7\",\n  \"action\": \"sqli_probe\",\n  \"dangerous\": true,\n  \"justification\": \"Confirm SQLi on local Juice Shop search only.\",\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/rest/products/search\",\n    \"params\": {\n      \"q\": \"' OR '1'='1\"\n    }\n  }\n}"}}
+{"ts": "2026-07-20T03:28:47.616076+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 28}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"538d0d90\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"538d0d90\"\n}"}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 383}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 36}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"ee095ab0\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"ee095ab0\"\n}"}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 385}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 24}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"3acc427e\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"3acc427e\"\n}"}}
+{"ts": "2026-07-20T03:28:47.616667+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 362}}
+{"ts": "2026-07-20T03:28:47.625312+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.625312+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 28}}
+{"ts": "2026-07-20T03:28:47.625312+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"781df326\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"781df326\"\n}"}}
+{"ts": "2026-07-20T03:28:47.625312+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 362}}
+{"ts": "2026-07-20T03:28:47.625312+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.630724+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 35}}
+{"ts": "2026-07-20T03:28:47.631725+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"b79596c0\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"b79596c0\"\n}"}}
+{"ts": "2026-07-20T03:28:47.632720+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 392}}
+{"ts": "2026-07-20T03:28:47.634254+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.634254+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 43}}
+{"ts": "2026-07-20T03:28:47.634254+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"75f60bfa\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"75f60bfa\"\n}"}}
+{"ts": "2026-07-20T03:28:47.634254+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 380}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 32}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"ba38aa12\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"ba38aa12\"\n}"}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 365}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 27}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"84714ab2\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"84714ab2\"\n}"}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 356}}
+{"ts": "2026-07-20T03:28:47.639599+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.648727+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 38}}
+{"ts": "2026-07-20T03:28:47.649859+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"12c62bea\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"12c62bea\"\n}"}}
+{"ts": "2026-07-20T03:28:47.651231+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 376}}
+{"ts": "2026-07-20T03:28:47.652374+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}
+{"ts": "2026-07-20T03:28:47.655080+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 63, "user_len": 32}}
+{"ts": "2026-07-20T03:28:47.655655+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"id\": \"0125a9d9\",\n  \"message\": \"OK\",\n  \"echo_hash\": \"0125a9d9\"\n}"}}
+{"ts": "2026-07-20T03:28:47.656915+00:00", "agent": "llm", "event": "request", "data": {"mock": true, "system_len": 70, "user_len": 383}}
+{"ts": "2026-07-20T03:28:47.656915+00:00", "agent": "llm", "event": "response", "data": {"mock": true, "preview": "{\n  \"mock\": true,\n  \"score\": 0.85,\n  \"verdict\": \"partial_match\",\n  \"reason\": \"Mock judge: endpoint/risk aligned.\"\n}"}}

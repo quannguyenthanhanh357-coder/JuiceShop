@@ -14,7 +14,7 @@
       "task": "attack_surface_done",
       "data": {
         "mock": true,
-        "id": "a66fba32",
+        "id": "732df7e3",
         "endpoints": [
           {
             "path": "/rest/products/search",

@@ -65,7 +65,7 @@ API keys Kong demo: `recon-key-demo` (GET), `exploit-key-demo` (POST).
 | Tuần | Nội dung | Trạng thái |
 |---|---|---|
 | 0 | Clone Juice Shop + Compose | ✅ Done |
-| 1 | SAST/DAST CI + parse + Attack Surface + seed reports | ✅ Skeleton + demo |
+| 1 | SAST/DAST CI + parse + Attack Surface + seed reports | ✅ CI verified + demo |
 | 2 | Kong IAM + `test_kong_iam.py` + MCP stub | ✅ Skeleton + demo |
 | 3 | RAG ingest / hybrid / retrieval eval | ✅ Skeleton + demo (BOW fallback) |
 | 4 | Recon Agent → Attack Surface Map | ✅ Skeleton + demo (mock LLM) |

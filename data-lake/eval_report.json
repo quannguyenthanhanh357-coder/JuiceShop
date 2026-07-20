@@ -2,7 +2,7 @@
   "detect_rate": 1.0,
   "detected": 10,
   "total": 10,
-  "avg_seconds": 0.007394146919250488,
+  "avg_seconds": 0.004219603538513183,
   "false_positive_est": 0.1,
   "rows": [
     {

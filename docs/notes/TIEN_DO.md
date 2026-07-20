@@ -17,8 +17,8 @@ Cập nhật: 2026-07-20
 ### Tuần 1 — SAST/DAST + CI/CD
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| CI Semgrep/ZAP | ✅ skeleton | `.github/workflows/security-scan.yml` |
-| `parse_results.py` + seed reports | ✅ | `scripts/seed_sample_reports.py` |
+| CI Semgrep/ZAP | ✅ verified | Run [29714467839](https://github.com/quannguyenthanhanh357-coder/JuiceShop/actions/runs/29714467839) — Semgrep+ZAP success; artifacts trong `data-lake/ci-artifacts/` |
+| `parse_results.py` + seed reports | ✅ | CI reports → `data-lake/vuln_data.db` (Semgrep+ZAP) |
 | `ATTACK_SURFACE.md` | ✅ | `docs/notes/` |
 
 ### Tuần 2 — Kong & IAM

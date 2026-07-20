@@ -1,22 +1,25 @@
 [
   {
     "url": "http://localhost:8000/rest/products/search?q=%27+OR+1%3D1--",
-    "status": 0,
-    "error": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /rest/products/search?q=%27+OR+1%3D1-- (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))",
+    "status": 500,
+    "latency_ms": 890,
+    "body_preview": "<html>\n  <head>\n    <meta charset='utf-8'> \n    <title>Error: SQLITE_ERROR: incomplete input</title>\n    <style>* {\n  margin: 0;\n  padding: 0;\n  outline: 0;\n}\n\nbody {\n  padding: 80px 100px;\n  font: 13px \"Helvetica Neue\", \"Lucida Grande\", \"Arial\";\n  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));\n  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);\n  background-repeat: no-repeat;\n  color: #555;\n  -webkit-font-smoothing: antialiased;\n}\nh1, h2 {\n  f",
     "anomaly": true,
     "payload": "' OR 1=1--"
   },
   {
     "url": "http://localhost:8000/rest/products/search?q=%3Cscript%3Ealert%281%29%3C%2Fscript%3E",
-    "status": 0,
-    "error": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /rest/products/search?q=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))",
-    "anomaly": true,
+    "status": 200,
+    "latency_ms": 61,
+    "body_preview": "{\"status\":\"success\",\"data\":[]}",
+    "anomaly": false,
     "payload": "<script>alert(1)</script>"
   },
   {
     "url": "http://localhost:8000/rest/products/search?q=%27+UNION+SELECT+null--",
-    "status": 0,
-    "error": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /rest/products/search?q=%27+UNION+SELECT+null-- (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))",
+    "status": 500,
+    "latency_ms": 72,
+    "body_preview": "<html>\n  <head>\n    <meta charset='utf-8'> \n    <title>Error: SQLITE_ERROR: near &quot;UNION&quot;: syntax error</title>\n    <style>* {\n  margin: 0;\n  padding: 0;\n  outline: 0;\n}\n\nbody {\n  padding: 80px 100px;\n  font: 13px \"Helvetica Neue\", \"Lucida Grande\", \"Arial\";\n  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));\n  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);\n  background-repeat: no-repeat;\n  color: #555;\n  -webkit-font-smoothing: antiali",
     "anomaly": true,
     "payload": "' UNION SELECT null--"
   }
