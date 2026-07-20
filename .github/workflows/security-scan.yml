@@ -62,11 +62,15 @@ jobs:
           docker logs juice-shop
           exit 1
 
-      # action-baseline tự ghi report_json.json / report_md.md / report_html.html
-      # vào workspace (mount /zap/wrk) và upload artifact — không có input `format`,
-      # không cần -J riêng (đã hardcode -J report_json.json trong action).
+      # ZAP container (user zap) cần ghi zap.yaml + reports vào workspace mount /zap/wrk
+      - name: Make workspace writable for ZAP
+        run: chmod -R a+rwX .
+
+      # v0.12 dùng upload-artifact v3 (API 6.0-preview) → GitHub trả 400
+      # "artifact name is not valid" dù tên hợp lệ. v0.14+ chuyển sang artifact v4.
+      # action tự ghi report_json.json / report_md.md / report_html.html vào workspace.
       - name: OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.12.0
+        uses: zaproxy/action-baseline@v0.15.0
         with:
           target: 'http://localhost:3000'
           fail_action: false
