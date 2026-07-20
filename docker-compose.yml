@@ -1,0 +1,28 @@
+# Project Sentinel — giả lập deploy staging trên localhost
+# Nhanh (image pin cùng version):  docker compose up -d
+# Build từ source (Tuần 7 sửa code): docker compose up -d --build
+# App: http://localhost:3000
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:v20.1.1
+    build:
+      context: ./juice-shop
+    container_name: sentinel-juice-shop
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+    networks:
+      - sentinel-net
+
+  # Tuần 2+: bỏ comment để thêm Kong cùng mạng
+  # kong:
+  #   image: kong:3.6
+  #   ...
+
+networks:
+  sentinel-net:
+    name: sentinel-net
+    driver: bridge

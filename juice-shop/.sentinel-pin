@@ -1,0 +1,5 @@
+version=20.1.1
+tag=v20.1.1
+commit=f915bddd82790d0f3018902d36ae9b4241a5f51f
+source=https://github.com/juice-shop/juice-shop
+cloned_for=Project-Sentinel (SAST + local Compose deploy)

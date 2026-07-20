@@ -83,7 +83,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Parse SAST/DAST results into Data Lake (SQLite)')
     parser.add_argument('--semgrep', type=str, help='Đường dẫn tới file JSON của Semgrep', default='semgrep-report.json')
     parser.add_argument('--zap', type=str, help='Đường dẫn tới file JSON của ZAP', default='zap-report.json')
-    parser.add_argument('--db', type=str, help='Đường dẫn tới SQLite Database', default='../data-lake/vuln_data.db')
+    parser.add_argument('--db', type=str, help='Đường dẫn tới SQLite Database', default='data-lake/vuln_data.db')
     
     args = parser.parse_args()
     
